@@ -1,0 +1,47 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+th{
+  background-color: #4CAF50;
+  color: white;
+  text-align: left;
+  padding: 10px;
+}
+
+table{
+  width: 800px;
+  border-collapse: collapse;
+  border-spacing: 15px;
+  margin-top: 20px;
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+th, td {
+border: 1px solid #ddd;
+padding: 15px; /* Increases spacing inside cells */
+text-align: center;
+}
+
+#delete,
+#change{
+  background-color: #3F7D58;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+}
+
+#delete:active,
+#change:active{
+  opacity: 0.6;
+}
+  
