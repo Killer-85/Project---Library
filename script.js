@@ -1,4 +1,5 @@
 const displayLibrary = document.getElementById('library-container');
+const dialog = document.getElementById('dialog');
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -8,7 +9,7 @@ function Book(title, author, pages, read) {
   this.id = crypto.randomUUID();
 }
 
-const myLibrary = [];
+let myLibrary = [];
 
 function addBookToLibrary(title, author, pages, read) {
   let newBook = new Book(title, author, pages, read);
@@ -21,29 +22,15 @@ addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
 addBookToLibrary("Pride and Prejudice", "Jane Austen", 279, false);
 addBookToLibrary("Moby Dick", "Herman Melville", 635, true);
 
-// function displayBooks() {
-//   myLibrary.forEach(book => {
-//     const card = document.createElement('div');
-//     card.classList.add('card'); // Use the correct variable name
-//     card.innerHTML = `
-//       <h3>
-//         Title <br>
-//         ${book.title}
-//       </h3>
-//     `;
-
-//     displayLibrary.appendChild(card); // Append using the correct variable
-//   });
-// }
-
-// // Call the function to display books
-// displayBooks();
+createTable();
 
 function createTable(){
-  const tableBody = document.querySelector('#bookTable tbody');
+  const tableBody = document.querySelector('#book-table tbody');
+  tableBody.innerHTML = "";
 
   myLibrary.forEach((Book,index) =>{
     const row = document.createElement('tr');
+    
 
     row.innerHTML = `
       <td>${Book.title}</td>
@@ -57,4 +44,68 @@ function createTable(){
   });
 }
 
-createTable();
+//Add New Book Button
+const addBookBtn = document.getElementById('add-book');
+
+
+addBookBtn.addEventListener('click',() =>{
+  dialog.show();
+})
+
+//Submit Button
+
+const submitBtn = document.getElementById('submit-btn');
+
+submitBtn.addEventListener('click',(e) =>{
+  e.preventDefault();
+  
+  const title = document.getElementById('title');
+  const author = document.getElementById('author');
+  const pages = document.getElementById('pages');
+  const read = document.getElementById('read').checked;
+
+  addBookToLibrary(title.value,author.value,pages.value,read);
+
+  dialog.close();
+
+  createTable();
+
+  title.value = "";
+  author.value = "";
+  pages.value = "";
+  read.checked = false;
+})
+
+//Cancel Button
+const cancelBtn = document.getElementById('cancel-btn');
+cancelBtn.addEventListener('click',() =>{
+  dialog.close();
+})
+
+//Delete button
+function deleteBook(dataID){
+  myLibrary = myLibrary.filter(book => book.id !== dataID);
+}
+
+const bookTable = document.querySelector('#book-table');bookTable.addEventListener('click', (e) => {
+  if(e.target && e.target.id === 'delete'){
+    const deleteId = e.target.getAttribute('data-id');
+    deleteBook(deleteId);
+    createTable();
+  }
+
+  Book.prototype.changeStatus = function () {
+    this.read = !this.read;
+  }
+
+  //Change statust
+
+  if(e.target && e.target.id ==='change'){
+    const changeId = e.target.getAttribute('data-id');
+    const book = myLibrary.find(b => b.id === changeId);
+    if(book){
+      book.changeStatus();
+      createTable();
+    } 
+  }
+});
