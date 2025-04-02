@@ -16,13 +16,6 @@ function addBookToLibrary(title, author, pages, read) {
   myLibrary.push(newBook);
 }
 
-addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 324, true);
-addBookToLibrary("1984", "George Orwell", 328, false);
-addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
-addBookToLibrary("Pride and Prejudice", "Jane Austen", 279, false);
-addBookToLibrary("Moby Dick", "Herman Melville", 635, true);
-
-createTable();
 
 function createTable(){
   const tableBody = document.querySelector('#book-table tbody');
@@ -109,3 +102,12 @@ const bookTable = document.querySelector('#book-table');bookTable.addEventListen
     } 
   }
 });
+
+
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 324, true);
+addBookToLibrary("1984", "George Orwell", 328, false);
+addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
+addBookToLibrary("Pride and Prejudice", "Jane Austen", 279, false);
+addBookToLibrary("Moby Dick", "Herman Melville", 635, true);
+
+createTable();
